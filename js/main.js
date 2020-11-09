@@ -1,6 +1,5 @@
 var myHeaders = new Headers();
-myHeaders.append("DHL-API-Key", "R9JML1tObzFgF8te7Yzwf6XQyzSvKE38");
-
+myHeaders.append("DHL-API-Key", "Your-API-Key");
 var requestOptions = {
   method: "GET",
   headers: myHeaders,
@@ -33,15 +32,18 @@ function showMap(latitude, longitude, data) {
   let markerUser = L.marker([latitude, longitude]).addTo(map);
 
   let servicePointIcon = L.icon({
-    iconUrl: '../img/storefront-24px.svg',
-    iconSize: [36, 36]
+    iconUrl: "../img/storefront-24px.svg",
+    iconSize: [36, 36],
   });
-  let markerServicePoint = L.marker([
-    data.locations[0].place.geo.latitude,
-    data.locations[0].place.geo.longitude,
-  ], {
-      icon: servicePointIcon
-  }).addTo(map);
+  let markerServicePoint = L.marker(
+    [
+      data.locations[0].place.geo.latitude,
+      data.locations[0].place.geo.longitude,
+    ],
+    {
+      icon: servicePointIcon,
+    }
+  ).addTo(map);
   // let popup = L.popup()
   //   .setLatLng([data.locations[0].place.geo.latitude, data.locations[0].place.geo.longitude])
   //   .setContent(`<h3>${data.locations[0].name}</h3>
