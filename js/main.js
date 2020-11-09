@@ -1,5 +1,5 @@
 var myHeaders = new Headers();
-myHeaders.append("DHL-API-Key", "Your-API-Key");
+myHeaders.append("DHL-API-Key", "Your_API_KEY");
 var requestOptions = {
   method: "GET",
   headers: myHeaders,
@@ -44,10 +44,9 @@ function showMap(latitude, longitude, data) {
       icon: servicePointIcon,
     }
   ).addTo(map);
-  // let popup = L.popup()
-  //   .setLatLng([data.locations[0].place.geo.latitude, data.locations[0].place.geo.longitude])
-  //   .setContent(`<h3>${data.locations[0].name}</h3>
-  //                 <p>De ${data.locations[0].openingHours[0].opens} a ${data.locations[0].openingHours[0].closes}</p>
-  //                 <p>${data.locations[0].place.address.streetAddress}</p>`)
-  //   .openOn(map);
+  document.getElementById("name").innerHTML = data.locations[0].name;
+  document.getElementById("openHour").innerHTML = `Abre: ${data.locations[0].openingHours[0].opens}`;
+  document.getElementById("closeHour").innerHTML = `Cierra: ${data.locations[0].openingHours[0].closes}`;
+  document.getElementById("address").innerHTML = data.locations[0].place.address.streetAddress;
+  document.getElementById("distance").innerHTML = `Distancia: ${data.locations[0].distance} metros`;
 }
