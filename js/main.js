@@ -1,6 +1,6 @@
-var myHeaders = new Headers();
-myHeaders.append("DHL-API-Key", "Your_API_KEY");
-var requestOptions = {
+let myHeaders = new Headers();
+myHeaders.append("DHL-API-Key", "Your Customer Key");
+let requestOptions = {
   method: "GET",
   headers: myHeaders,
   redirect: "follow",
@@ -15,7 +15,6 @@ navigator.geolocation.getCurrentPosition(function (position) {
       return response.json();
     })
     .then((data) => {
-      console.log(data);
       showMap(position.coords.latitude, position.coords.longitude, data);
     })
     .catch((error) => {
@@ -29,13 +28,14 @@ function showMap(latitude, longitude, data) {
     attribution:
       'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
   }).addTo(map);
-  let markerUser = L.marker([latitude, longitude]).addTo(map);
+  
+  L.marker([latitude, longitude]).addTo(map);
 
   let servicePointIcon = L.icon({
     iconUrl: "../img/storefront-24px.svg",
     iconSize: [36, 36],
   });
-  let markerServicePoint = L.marker(
+  L.marker(
     [
       data.locations[0].place.geo.latitude,
       data.locations[0].place.geo.longitude,
@@ -44,6 +44,7 @@ function showMap(latitude, longitude, data) {
       icon: servicePointIcon,
     }
   ).addTo(map);
+  
   document.getElementById("name").innerHTML = data.locations[0].name;
   document.getElementById("openHour").innerHTML = `Abre: ${data.locations[0].openingHours[0].opens}`;
   document.getElementById("closeHour").innerHTML = `Cierra: ${data.locations[0].openingHours[0].closes}`;
